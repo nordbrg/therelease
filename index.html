@@ -57,8 +57,27 @@
             color: white;
             padding: 15px;
             font-size: 18px;
-            text-align: center;
             border-top: 2px solid #333;
+            text-align: center;
+            perspective: 1000px;
+        }
+        .info-line-text {
+            display: inline-block;
+            animation: flip-down 1s ease-in-out;
+            transform-style: preserve-3d;
+        }
+        @keyframes flip-down {
+            0% {
+                transform: rotateX(-90deg);
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: rotateX(0deg);
+                opacity: 1;
+            }
         }
     </style>
 </head>
@@ -93,14 +112,27 @@
         ];
 
         const infoLine = document.getElementById('infoLine');
+        let lastMessage = '';
 
         function updateInfoLine() {
-            const randomMessage = infoMessages[Math.floor(Math.random() * infoMessages.length)];
-            infoLine.textContent = randomMessage;
+            let randomMessage;
+            do {
+                randomMessage = infoMessages[Math.floor(Math.random() * infoMessages.length)];
+            } while (randomMessage === lastMessage);
+
+            lastMessage = randomMessage;
+            const textElement = document.createElement('span');
+            textElement.className = 'info-line-text';
+            textElement.textContent = randomMessage;
+            infoLine.innerHTML = '';
+            infoLine.appendChild(textElement);
+
+            textElement.addEventListener('animationend', () => {
+                setTimeout(updateInfoLine, 3000);
+            }, { once: true });
         }
 
         updateInfoLine();
-        setInterval(updateInfoLine, 10000);
     </script>
 </body>
 </html>
