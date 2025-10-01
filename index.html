@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Release</title>
+    <link rel="icon" type="image/svg+xml" href="sad-pepe.svg">
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
@@ -19,7 +20,7 @@
 
         const label = document.getElementById('releaseLabel');
         const formattedDate = today.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-        label.innerHTML = `</span><br><br>Number of days passed without release<br><span class="days-number">${diffDays}</span><br>Re-planned release date: <span class="release-date"><br>${formattedDate}`;
+        label.innerHTML = `</span><br><br>Number of wdays passed without release<br><span class="days-number">${diffDays}</span><br>Re-planned release date: <span class="release-date"><br>${formattedDate}`;
 
         const infoMessages = [
             "Still waiting for the release...",
@@ -43,7 +44,7 @@
             let randomMessage;
             do {
                 randomMessage = infoMessages[Math.floor(Math.random() * infoMessages.length)];
-            } while (randomMessage === lastMessage);
+            } while (randomMessage === lastMessage && infoMessages.length > 1);
 
             lastMessage = randomMessage;
             const textElement = document.createElement('span');
@@ -57,7 +58,20 @@
             }, { once: true });
         }
 
-        updateInfoLine();
+        fetch('hu.json')
+            .then(response => response.json())
+            .then(namedays => {
+                const todayKey = `0000-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+                const todayNames = namedays[todayKey];
+
+                if (todayNames && todayNames.length > 0) {
+                    const namesList = todayNames.join(', ');
+                    infoMessages.push(`Today’s ${namesList} name day in Hungary - maybe today’s the day.`);
+                }
+
+                updateInfoLine();
+            })
+            .catch(error => console.error('Error loading name days:', error));
     </script>
 </body>
 </html>
