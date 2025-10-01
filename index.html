@@ -54,7 +54,7 @@
             infoLine.appendChild(textElement);
 
             textElement.addEventListener('animationend', () => {
-                setTimeout(updateInfoLine, 3000);
+                setTimeout(updateInfoLine, 4000);
             }, { once: true });
         }
 
@@ -66,7 +66,7 @@
 
                 if (todayNames && todayNames.length > 0) {
                     const namesList = todayNames.join(', ');
-                    infoMessages.push(`Today’s ${namesList} name day in Hungary - maybe today’s the day.`);
+                    infoMessages.push(`Today’s ${namesList} name day in Hungary - maybe today’s the day`);
                 }
 
                 updateInfoLine();
