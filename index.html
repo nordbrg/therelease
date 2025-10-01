@@ -58,7 +58,7 @@
             }, { once: true });
         }
 
-        fetch('hu.json')
+        fetch('namedays.json')
             .then(response => response.json())
             .then(namedays => {
                 const todayKey = `0000-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
