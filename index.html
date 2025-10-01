@@ -24,10 +24,83 @@
             font-size: 24px;
             line-height: 1.6;
         }
+        .release-label {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background-color: transparent;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-size: 14px;
+            color: white;
+            text-align: left;
+        }
+        .days-number {
+            background-color: red;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 140px;
+            display: inline-block;
+            margin-top: 10px;
+        }
+        .release-date {
+            background-color: rgb(0, 255, 55);
+            font-size: 30px;
+        }
+        .info-line {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 15px;
+            font-size: 18px;
+            text-align: center;
+            border-top: 2px solid #333;
+        }
     </style>
 </head>
 <body>
+    <div class="release-label" id="releaseLabel"></div>
     <div class="container">
     </div>
+    <div class="info-line" id="infoLine"></div>
+    <script>
+        const originalReleaseDate = new Date('2025-06-30');
+        const today = new Date();
+        const diffTime = Math.abs(today - originalReleaseDate);
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+        const label = document.getElementById('releaseLabel');
+        const formattedDate = today.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+        label.innerHTML = `Planned release date: <span class="release-date">${formattedDate}</span><br><br>Number of days passed without release<br><span class="days-number">${diffDays}</span>`;
+
+        const infoMessages = [
+            "Still waiting for the release...",
+            "Any day now...",
+            "The wait continues...",
+            "Refresh for more waiting",
+            "Patience is a virtue",
+            "Release date: Soon™",
+            "Coming when it's ready",
+            "The show must go on... eventually",
+            "Grab a coffee, this might take a while",
+            "Maybe tomorrow?",
+            "Progress: Still in development",
+            "Random fact: We're still waiting"
+        ];
+
+        const infoLine = document.getElementById('infoLine');
+
+        function updateInfoLine() {
+            const randomMessage = infoMessages[Math.floor(Math.random() * infoMessages.length)];
+            infoLine.textContent = randomMessage;
+        }
+
+        updateInfoLine();
+        setInterval(updateInfoLine, 10000);
+    </script>
 </body>
 </html>
