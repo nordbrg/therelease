@@ -32,3 +32,8 @@ body {
     85% { color: violet; }
     100% { color: red; }
 }
+@media (max-width: 768px) {
+    body {
+        background-size: 100% auto;
+    }
+}
