@@ -1,7 +1,7 @@
 body {
     background-color: black;
-    background-image: url('https://i.imgur.com/lXSWGjR.png');
-    background-size: contain;
+    background-image: url('release.gif');
+    background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
     color: white;
@@ -13,62 +13,22 @@ body {
     margin: 0;
     text-align: center;
 }
-.container {
-    font-size: 24px;
-    line-height: 1.6;
-}
-.release-label {
+.now-label {
     position: fixed;
-    top: 20px;
-    left: 20px;
-    background-color: transparent;
-    padding: 10px 15px;
-    border-radius: 5px;
-    font-size: 14px;
-    color: white;
-    text-align: left;
-}
-.days-number {
-    background-color: red;
-    padding: 10px 20px;
-    border-radius: 5px;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 100px;
     font-weight: bold;
-    font-size: 140px;
-    display: inline-block;
-    margin-top: 10px;
+    animation: rainbow 3s linear infinite;
 }
-.release-date {
-    background-color: rgb(0, 255, 55);
-    font-size: 30px;
-}
-.info-line {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: rgba(0, 0, 0, 0.9);
-    color: white;
-    padding: 15px;
-    font-size: 18px;
-    border-top: 2px solid #333;
-    text-align: center;
-    perspective: 1000px;
-}
-.info-line-text {
-    display: inline-block;
-    animation: flip-down 1s ease-in-out;
-    transform-style: preserve-3d;
-}
-@keyframes flip-down {
-    0% {
-        transform: rotateX(-90deg);
-        opacity: 0;
-    }
-    50% {
-        opacity: 1;
-    }
-    100% {
-        transform: rotateX(0deg);
-        opacity: 1;
-    }
+@keyframes rainbow {
+    0% { color: red; }
+    14% { color: orange; }
+    28% { color: yellow; }
+    42% { color: green; }
+    57% { color: blue; }
+    71% { color: indigo; }
+    85% { color: violet; }
+    100% { color: red; }
 }
